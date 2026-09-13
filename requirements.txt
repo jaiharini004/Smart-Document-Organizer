@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pydantic-settings
+supabase
+redis
+celery
+PyMuPDF
+groq

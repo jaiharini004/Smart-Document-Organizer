@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1 # Scale up for more background processing power
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: sdo-worker:latest
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: sdo-config
+        - secretRef:
+            name: sdo-secrets

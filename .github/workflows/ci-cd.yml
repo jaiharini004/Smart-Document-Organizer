@@ -1,0 +1,76 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set lower case owner name
+        run: |
+          echo "REPO_OWNER=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Backend Image
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-backend:latest
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-backend:${{ github.sha }}
+
+      # Worker Image
+      - name: Build and push worker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./worker/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-worker:latest
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-worker:${{ github.sha }}
+
+      # Frontend Image
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./frontend/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-frontend:latest
+            ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/sdo-frontend:${{ github.sha }}
+          build-args: |
+            VITE_API_URL=http://localhost:8000
+
+      # Optional Deployment Step placeholder
+      - name: Deploy to Kubernetes
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          echo "Deployment step placeholder."
+          echo "Configure kubectl here and run: kubectl apply -f k8s/"

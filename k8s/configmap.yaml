@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sdo-config
+data:
+  SUPABASE_STORAGE_BUCKET: "documents"
+  REDIS_URL: "redis://redis-service:6379/0"
+  GROQ_MODEL: "llama-3.1-8b-instant"
+  LOG_LEVEL: "INFO"
+  # Replace this with the external IP/domain of the backend service once deployed
+  VITE_API_URL: "http://localhost:8000"

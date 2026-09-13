@@ -1,0 +1,14 @@
+[project]
+name = "worker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "celery[redis]>=5.6.3",
+    "groq>=1.7.0",
+    "loguru>=0.7.3",
+    "pydantic-settings>=2.15.0",
+    "pymupdf>=1.28.2",
+    "supabase>=2.31.0",
+]

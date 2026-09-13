@@ -1,0 +1,47 @@
+# Git
+.git
+.gitignore
+
+# Environment variables
+.env
+.env.example
+
+# Python virtual environments
+.venv
+venv
+env
+ENV
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation & Configs
+README.md
+Smart_Document_Organizer_Architecture.md
+walkthrough.md
+implementation_plan.md
+task.md
+docker-compose.yml
+setup.bat
+
+# Kubernetes Manifests
+k8s/
+
+# GitHub Actions
+.github/
+
+# OS generated files
+.DS_Store
+Thumbs.db
