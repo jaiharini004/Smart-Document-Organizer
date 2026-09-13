@@ -1,5 +1,5 @@
 
-# 📚 Smart Document Organizer — An AI-Powered Document Extraction and Semantic Categorization Framework
+# 📚 Smart Document Organizer
 
 **Smart Document Organizer** is a cloud-ready document management system designed to help users efficiently store, organize, and find personal documents from a centralized platform. 
 The application allows users to upload PDF documents, automatically extract text and metadata, categorize files using AI, store document information, and search through their documents via a modern, glassmorphic UI.
