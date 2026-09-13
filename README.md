@@ -91,4 +91,4 @@ The React frontend will be available at `http://localhost:5173/` and the FastAPI
 For detailed information regarding the database schema, API contracts, deployment strategies (Docker/Kubernetes), and CI/CD pipelines, please refer to the `Smart_Document_Organizer_Architecture.md` file included in this directory.
 
 ## License
-This project is open-source and available under the [MIT License](LICENSE). Copyright (c) 2026 [Jai Harini](JAI HARINI K S)
+This project is open-source and available under the [MIT License](LICENSE). Copyright (c) 2026 JAI HARINI K S
